@@ -25,9 +25,9 @@ class _HeightSelectorState extends State<HeightSelector> {
           // Redondea las esquinas.
           borderRadius: BorderRadius.circular(16),
         ),
-        // Agrega espacio interno dentro de la tarjeta.
+        // Agrega espacio interno dentro de la tarjeta. (SOLO 8 PARA ARRIBA)
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.only(top: 8),
           // Column coloca los elementos uno debajo de otro.
           child: Column(
             children: [
