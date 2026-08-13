@@ -3,14 +3,16 @@ import 'package:imc_calculator/core/app_color.dart';
 import 'package:imc_calculator/core/text_styles.dart';
 
 class HeightSelector extends StatefulWidget {
-  const HeightSelector({super.key});
+  final double selectedHeight;
+  final Function(double) onHeightChange;
+  const HeightSelector(
+    {super.key, required this.selectedHeight, required this.onHeightChange});
 
   @override
   State<HeightSelector> createState() => _HeightSelectorState();
 }
 
 class _HeightSelectorState extends State<HeightSelector> {
-  double height = 220; // Altura inicial
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class _HeightSelectorState extends State<HeightSelector> {
               Text("Altura", style: TextStyles.bodyText),
               // Muestra la altura actual en centímetros.
               // toStringAsFixed(0) elimina los decimales.
-              Text("${height.toStringAsFixed(0)} cm", style: TextStyle(
+              Text("${widget.selectedHeight.toStringAsFixed(0)} cm", style: TextStyle(
                 color: Colors.white,
                 fontSize: 38,
                 fontWeight: FontWeight.bold,
@@ -42,12 +44,12 @@ class _HeightSelectorState extends State<HeightSelector> {
               // Slider permite seleccionar la altura.
               Slider(
                 // Valor actual del Slider.
-                value: height,
+                value: widget.selectedHeight,
                 // Se ejecuta cuando el usuario mueve el Slider.
                 onChanged: (newHeight) {
                   // Actualiza la interfaz con el nuevo valor.
                   setState(() {
-                    height = newHeight;
+                    widget.onHeightChange(newHeight);
                   });
                 },
                 // Altura mínima: 150 cm; Altura máxima: 220 cm.
@@ -56,7 +58,7 @@ class _HeightSelectorState extends State<HeightSelector> {
                 // Divide el Slider en 70 pasos.
                 divisions: 70,
                 // Muestra el valor seleccionado.
-                label: "${height.toStringAsFixed(0)} cm",
+                label: "${widget.selectedHeight.toStringAsFixed(0)} cm",
                 // Color de la parte activa del Slider.
                 activeColor: AppColors.primary,
               )

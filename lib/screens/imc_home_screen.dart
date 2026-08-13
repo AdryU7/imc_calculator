@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:imc_calculator/components/gender_selector.dart';
 import 'package:imc_calculator/components/height_selector.dart';
 import 'package:imc_calculator/components/number_selector.dart';
+import 'package:imc_calculator/core/app_color.dart';
+import 'package:imc_calculator/core/text_styles.dart';
 
 class ImcHomeScreen extends StatefulWidget {
   const ImcHomeScreen({super.key});
@@ -13,6 +15,7 @@ class ImcHomeScreen extends StatefulWidget {
 class _ImcHomeScreenState extends State<ImcHomeScreen> {
   int selectedAge = 20; // Variable de estado mutable para almacenar la edad seleccionada (inicial en 20).
   int selectedWeight = 80; // Variable de estado mutable para almacenar el peso seleccionado (inicial en 80).
+  double selectedHeight = 160; // Variable de estado mutable para almacenar la altura seleccionada (inicial en 160).
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,11 @@ class _ImcHomeScreenState extends State<ImcHomeScreen> {
         // Componente para seleccionar el género (masculino/femenino).
         GenderSelector(),
         // Componente para seleccionar la altura mediante un deslizador (slider).
-        HeightSelector(),
+        HeightSelector(selectedHeight: selectedHeight, onHeightChange: (newHeight) {
+          setState(() {
+            selectedHeight = newHeight;
+          });
+        }),
         // Agrega un margen externo uniforme alrededor de los selectores numéricos.
         Padding(
           // Define un espacio interno/externo de 16px en todos los lados.
@@ -79,6 +86,31 @@ class _ImcHomeScreenState extends State<ImcHomeScreen> {
                 ),
               ),
             ],
+          ),
+        ),
+        Spacer(),
+        // Botones personalizados
+        // 2. Padding
+        Padding(
+          padding: const EdgeInsets.all(16),
+          // 3. SizedBox
+          child: SizedBox(
+            height: 60,
+            width: double.infinity,
+            // 1. ElevatedButton
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                // Bordeado
+                shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                )),
+                // Background color
+                backgroundColor: WidgetStateProperty.all(AppColors.primary),
+              ),
+              // child: Text va al final del constructor
+              child: Text("Calcular", style: TextStyles.bodyText),
+            ),
           ),
         ),
       ],
