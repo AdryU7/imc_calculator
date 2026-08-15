@@ -4,6 +4,7 @@ import 'package:imc_calculator/components/height_selector.dart';
 import 'package:imc_calculator/components/number_selector.dart';
 import 'package:imc_calculator/core/app_color.dart';
 import 'package:imc_calculator/core/text_styles.dart';
+import 'package:imc_calculator/screens/imc_result_screen.dart';
 
 class ImcHomeScreen extends StatefulWidget {
   const ImcHomeScreen({super.key});
@@ -99,7 +100,16 @@ class _ImcHomeScreenState extends State<ImcHomeScreen> {
             width: double.infinity,
             // 1. ElevatedButton
             child: ElevatedButton(
-              onPressed: () {},
+              // Navegacion a otra pantalla
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ImcResultScreen(
+                    weight: selectedWeight,
+                    height: selectedHeight
+                  ))
+                );
+              },
               style: ButtonStyle(
                 // Bordeado
                 shape: WidgetStateProperty.all(RoundedRectangleBorder(

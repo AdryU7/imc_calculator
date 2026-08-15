@@ -67,6 +67,9 @@ class _NumberSelectorState extends State<NumberSelector> {
               children: [
                 // Botón flotante para la acción de restar.
                 FloatingActionButton(
+                  // Identificador unico que se utiliza al pasar de pantalla para vincular 
+                  // animacion de pase de pantalla
+                  heroTag: null,
                   // Acción a ejecutar al presionar el botón.
                   onPressed: () {
                     // Llama a la función recibida desde el widget padre.
@@ -80,6 +83,7 @@ class _NumberSelectorState extends State<NumberSelector> {
                 SizedBox(width: 16),
                 // Botón flotante para la acción de sumar.
                 FloatingActionButton(
+                  heroTag: null,
                   // Acción a ejecutar al presionar el botón.
                   onPressed: () {
                     // Llama a la función recibida desde el widget padre.
